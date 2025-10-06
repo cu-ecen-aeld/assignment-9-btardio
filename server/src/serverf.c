@@ -114,12 +114,19 @@ void log_and_print(const char* fmt) {
 read_from_client (const int filedes, char* buffer, int nbytes)
 {
 
+    unsigned long* sss;
+
     char fbuffer[BUFFER_SIZE+1];
     int sbytes;
 
     FILE *file_pointer;
 
     bzero(fbuffer, BUFFER_SIZE+1);
+
+    unsigned long ioctl_index;
+    int ioctl_int_index;
+    int ioctl_offset;
+    int items_read;
 
     if (nbytes == 1) {
         // received a ""
@@ -128,6 +135,18 @@ read_from_client (const int filedes, char* buffer, int nbytes)
     }
     else
     {
+
+
+	// if instruction is, buffer is AESDCHAR_IOCSEEKTO:<index, offset>
+
+	printf("buffer: %s\n", buffer);
+	if(nbytes > 18 && 0 == strncmp("AESDCHAR_IOCSEEKTO:", buffer, 19)) {
+		printf("received AESDCHAR_IOSEEKTO\n");
+		items_read = sscanf(buffer, "AESDCHAR_IOCSEEKTO:%lu,%d", &ioctl_index, &ioctl_offset);
+		//sscanf(buffer, "AESDCHAR_IOCSEEKTO:%d,%
+		printf("read ioctl_index: %lu and ioctl_offset: %d\n", ioctl_index, ioctl_offset);
+	}
+
 
 
 #ifdef APPENDWRITE
@@ -207,15 +226,51 @@ read_from_client (const int filedes, char* buffer, int nbytes)
             return -11;
         }
 
-#ifdef USE_AESD_CHAR_DEVICE
+//#ifdef USE_AESD_CHAR_DEVICE
 	FILE* file = fopen(FILENAME_AESD_DEVICE, "r");
-#else
-        FILE* file = fopen(FILENAME, "r");
-#endif
+//#else
+//        FILE* file = fopen(FILENAME, "r");
+//#endif
         if (file == NULL) {
             perror("Error opening file");
             return 1;
         }
+
+	// almost forgot to ask - stack stack stack
+	//
+	
+
+
+//#ifdef USE_AESD_CHAR_DEVICE
+
+	FILE *debug;
+	debug = fopen("/home/btardio/myfile", "a");
+
+	ioctl_index = 0x0000000003;
+;
+
+	sss = malloc(sizeof(unsigned long));
+	//*sss = 0x0000000003;
+	//
+	*sss = 0x0000030303;
+
+	fprintf(debug, "!!!!!!!!!!!!!sending address"); //: %lX\n", sss);
+
+	fflush(debug);
+
+	fclose(debug);
+
+	ioctl(file, MY_DEVICE_SET_VALUE, sss);
+
+	free(sss);
+
+//	ioctl(file, MY_DEVICE_SET_VALUE, 1);
+	
+//	ioctl(file, MY_DEVICE_SET_VALUE, 0x0000000003);
+	
+
+//#endif
+
 
         fseek(file, 0, SEEK_END);
         long file_size = ftell(file);
