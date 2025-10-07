@@ -4,7 +4,7 @@
 #
 ##############################################################
 
-AESD_ASSIGNMENTS_DEVICES_VERSION = 'bd85014441781e394a82e054e510c6dadacde0d4'
+AESD_ASSIGNMENTS_DEVICES_VERSION = '690ffc5a5a7937437e26c41ad9d1308d3423d1c8'
 
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
