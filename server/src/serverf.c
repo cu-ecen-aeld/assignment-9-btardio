@@ -137,7 +137,7 @@ read_from_client (const int filedes, char* buffer, int nbytes)
     FILE *file_pointer;
 
     bzero(fbuffer, BUFFER_SIZE+1);
-
+    int instruction_seek = 0;
     unsigned long ioctl_index;
     int ioctl_int_index;
     int ioctl_offset;
@@ -156,6 +156,7 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 
 	printf("buffer: %s\n", buffer);
 	if(nbytes > 18 && 0 == strncmp("AESDCHAR_IOCSEEKTO:", buffer, 19)) {
+		instruction_seek = 1;
 		printf("received AESDCHAR_IOSEEKTO\n");
 		items_read = sscanf(buffer, "AESDCHAR_IOCSEEKTO:%lu,%d", &ioctl_index, &ioctl_offset);
 		//sscanf(buffer, "AESDCHAR_IOCSEEKTO:%d,%
@@ -283,11 +284,18 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 
 #ifdef APPENDWRITE
 	// write to file that is compared
-        if (fputs(buffer, file_pointer) == EOF) {
-            perror("Error writing to file");
-            fclose(file_pointer);
-            return -1;
-        }
+        
+	
+
+	
+	if (!instruction_seek) {
+	
+		if (fputs(buffer, file_pointer) == EOF) {
+	        	perror("Error writing to file");
+	        	fclose(file_pointer);
+	        	return -1;
+	        }
+	}
 
         if (fclose(file_pointer) == EOF) {
             perror("Error closing the file");
