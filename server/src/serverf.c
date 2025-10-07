@@ -77,6 +77,13 @@ extern sem_t mutex;
 
 struct entry;
 
+size_t custom_strlen(const char *str) {
+    size_t length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
+}
 
 void sig_handler(int signo)
 {
@@ -387,7 +394,10 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 
         fclose(file);
 	printf("filedes: %d\n", filedes);
-        sbytes = write(filedes, fbuffer, file_size);
+
+	int firstnullchar = custom_strlen(fbuffer);
+
+        sbytes = write(filedes, fbuffer, firstnullchar ); // bytes_read); //file_size);
 	printf("...\n");
 #else
 
