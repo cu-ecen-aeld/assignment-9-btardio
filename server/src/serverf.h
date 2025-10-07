@@ -14,6 +14,9 @@
 #include <sys/shm.h>
 #include <semaphore.h>
 #include <linux/ioctl.h>
+#include <syslog.h>
+
+#ifndef _SERVERF
 
 void sig_handler(int signo);
 
@@ -59,13 +62,9 @@ struct entry {
 
 
 
+#define MAJOR_NUM 123
 
-#define MY_DEVICE_MAGIC 'u'
+#define IOCTL_SET_MSG _IOR(MAJOR_NUM, 0, int *)
 
-// Define an IOCTL command that takes an unsigned long argument
-// _IOW indicates a write operation (data sent from user to kernel)
-#define MY_DEVICE_SET_VALUE _IOW(MY_DEVICE_MAGIC, 55, unsigned long)
 
-// Define an IOCTL command that returns an unsigned long
-// _IOR indicates a read operation (data sent from kernel to user)
-#define MY_DEVICE_GET_VALUE _IOR(MY_DEVICE_MAGIC, 1, unsigned long)
+#endif

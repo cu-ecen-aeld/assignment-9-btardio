@@ -2,18 +2,18 @@
 UNITY_ROOT=test/Unity/
 
 # CFLAGS=-std=c89
-CFLAGS += -Wall
-CFLAGS += -Wextra
-CFLAGS += -Wpointer-arith
-CFLAGS += -Wcast-align
-CFLAGS += -Wwrite-strings
-CFLAGS += -Wswitch-default
-CFLAGS += -Wunreachable-code
-CFLAGS += -Winit-self
-CFLAGS += -Wmissing-field-initializers
-CFLAGS += -Wno-unknown-pragmas
-CFLAGS += -Wundef
-CFLAGS += -Wold-style-definition
+# CFLAGS += -Wall
+# //CFLAGS += -Wextra
+# //CFLAGS += -Wpointer-arith
+# CFLAGS += -Wcast-align
+# CFLAGS += -Wwrite-strings
+# CFLAGS += -Wswitch-default
+# CFLAGS += -Wunreachable-code
+# CFLAGS += -Winit-self
+# CFLAGS += -Wmissing-field-initializers
+# CFLAGS += -Wno-unknown-pragmas
+# CFLAGS += -Wundef
+# CFLAGS += -Wold-style-definition
 
 LDFLAGS += -pthread
 

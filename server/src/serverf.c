@@ -110,6 +110,21 @@ void log_and_print(const char* fmt) {
     log_and_print_a(LOG_ERR, fmt);
 }
 
+int
+ioctl_set_msg_int(int file_desc, int* message)
+{
+	int ret_val;
+
+	ret_val = ioctl(file_desc, IOCTL_SET_MSG, message);
+
+	if (ret_val < 0) {
+		printf("ioctl_set_msg failed:%d\n", ret_val);
+		return -1;
+	}
+	return 0;
+}
+
+
     int
 read_from_client (const int filedes, char* buffer, int nbytes)
 {
@@ -145,6 +160,60 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 		items_read = sscanf(buffer, "AESDCHAR_IOCSEEKTO:%lu,%d", &ioctl_index, &ioctl_offset);
 		//sscanf(buffer, "AESDCHAR_IOCSEEKTO:%d,%
 		printf("read ioctl_index: %lu and ioctl_offset: %d\n", ioctl_index, ioctl_offset);
+
+
+		
+		int* ctrl_code = malloc(sizeof(int));
+		*ctrl_code = ioctl_index;
+
+		int file_desc;
+
+
+		file_desc = open("/dev/aesdchar", 0);
+		if (file_desc < 0) {
+			printf("Error opening file\n");
+			return -1;
+		}
+		ioctl_set_msg_int(file_desc, ctrl_code);
+
+		close(file_desc);
+
+
+
+
+
+
+
+/*
+
+	FILE* file = fopen(FILENAME_AESD_DEVICE, "r");
+        if (file == NULL) {
+            printf("Error opening file\n");
+            return 1;
+        }
+
+	
+	ioctl_index = 0x0000000003;
+;
+
+	sss = malloc(sizeof(unsigned long*));
+	//*sss = malloc(sizeof(unsigned long));
+	*sss = 0xFFFFFFFFFF;
+
+	printf("sss %lX\n", sss);
+	printf("*sss %lX\n", *sss);
+//	printf("**sss %lX\n", (unsigned long*)**sss);
+
+
+	ioctl(file, MY_DEVICE_SET_VALUE, sss);
+//	ioctl(file, MY_DEVICE_SET_VALUE, *sss);
+//	ioctl(file, MY_DEVICE_SET_VALUE, **sss);
+//	free(*sss);
+	free(sss);
+
+	fclose(file);
+		printf("!!!\n");
+		*/
 	}
 
 
@@ -187,7 +256,6 @@ read_from_client (const int filedes, char* buffer, int nbytes)
                 perror("shmdt child");
                 exit(1);
             }
-
             sem_post(&mutex);
 
         }
@@ -242,28 +310,36 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 
 
 //#ifdef USE_AESD_CHAR_DEVICE
+	
+//	openlog("aesdsocketthread", LOG_PID, LOG_USER);
 
-	FILE *debug;
-	debug = fopen("/home/btardio/myfile", "a");
+  //  unsigned long ioctl_index;
+    //int ioctl_int_index;
+   // int ioctl_offset;
+   // int items_read;
 
-	ioctl_index = 0x0000000003;
-;
 
-	sss = malloc(sizeof(unsigned long));
+
+
+
+//	ioctl_index = 0x0000000003;
+//;
+
+//	sss = malloc(sizeof(unsigned long));
 	//*sss = 0x0000000003;
 	//
-	*sss = 0x0000030303;
+//	*sss = 0x0000030303;
 
-	fprintf(debug, "!!!!!!!!!!!!!sending address"); //: %lX\n", sss);
+//	syslog(LOG_ERR, "sss %lX\n", sss);
+//	syslog(LOG_ERR, "*sss %lX\n", *sss);
 
-	fflush(debug);
+//	fprintf(debug, "!!!!!!!!!!!!!sending address"); //: %lX\n", sss);
 
-	fclose(debug);
+//	ioctl(file, MY_DEVICE_SET_VALUE, sss);
 
-	ioctl(file, MY_DEVICE_SET_VALUE, sss);
+//	free(sss);
 
-	free(sss);
-
+//	closelog();
 //	ioctl(file, MY_DEVICE_SET_VALUE, 1);
 	
 //	ioctl(file, MY_DEVICE_SET_VALUE, 0x0000000003);
@@ -436,6 +512,7 @@ void initialize() {
         exit(1);
     }
 
+
     if (sem_init(&mutex, 0, 1) != 0) {
         perror("sem_init failed");
         exit(EXIT_FAILURE);
@@ -450,6 +527,15 @@ void initialize() {
 }
 
 int pmain(void) {
+
+
+
+
+    unsigned long* sss;
+    unsigned long ioctl_index;
+    int ioctl_int_index;
+    int ioctl_offset;
+    int items_read;
 
     initialize();
 
