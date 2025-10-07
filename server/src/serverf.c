@@ -288,8 +288,8 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 	
 
 	
-	if (!instruction_seek) {
-	
+	if (instruction_seek == 0) {
+		printf("\n!!!! writing to file. !!!!\n");	
 		if (fputs(buffer, file_pointer) == EOF) {
 	        	perror("Error writing to file");
 	        	fclose(file_pointer);
@@ -355,17 +355,33 @@ read_from_client (const int filedes, char* buffer, int nbytes)
 
 //#endif
 
+//	if ( instruction_seek == 1 ) {
+//		fseek(file, ioctl_offset, SEEK_SET);
+//	} 
+	
 
         fseek(file, 0, SEEK_END);
         long file_size = ftell(file);
         fseek(file, 0, SEEK_SET);
+	
+	if ( instruction_seek == 1 ) {
+		fseek(file, ioctl_offset, SEEK_SET);
+	} 
 
-        size_t bytes_read = fread(fbuffer, 1, file_size, file);
-        if (bytes_read != (size_t)file_size) {
-            perror("Error reading file");
-            fclose(file);
-            return 1;
-        }
+
+        size_t bytes_read;
+       
+	if ( instruction_seek == 1 ) { 
+		bytes_read = fread(fbuffer, 1, file_size, file);
+	} else {
+		bytes_read = fread(fbuffer, 1, file_size, file);
+	}
+
+//        if (bytes_read != (size_t)file_size) {
+//            perror("Error reading file");
+//            fclose(file);
+//            return 1;
+//        }
 
         fbuffer[file_size] = '\0';
 
