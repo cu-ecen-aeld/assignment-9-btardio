@@ -6,7 +6,7 @@
 
 #TODO: Fill up the contents below in order to reference your assignment 3 git contents
 
-AESD_ASSIGNMENTS_SOCKET_VERSION = '893eff7a6eb678959ac25813e10ae629bba717d5'
+AESD_ASSIGNMENTS_SOCKET_VERSION = '1ea9ffef05073311eec74b086d13d60bad31f737'
 
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
