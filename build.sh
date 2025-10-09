@@ -11,13 +11,19 @@ HASHFILE="buildroot/linux/linux.hash"
 
 grep -qF -- "$LINE_TO_APPEND" "$HASHFILE" || echo "$LINE_TO_APPEND" >> "$HASHFILE"
 
+# this patch is erroring
+mv buildroot/board/qemu/patches/linux/0002-powerpc-boot-Fix-build-with-gcc-15.patch ./
+
+# this patch could be erroring
+
+# mv buildroot/board/qemu/patches/linux/0001-mips-Add-std-flag-specified-in-KBUILD_CFLAGS-to-vdso.patch ./
 
 source shared.sh
 
 EXTERNAL_REL_BUILDROOT=../base_external
-git submodule init
-git submodule sync
-git submodule update
+# git submodule init
+# git submodule sync
+# git submodule update
 
 if [ $# -lt 1 ]
 then
@@ -97,6 +103,6 @@ then
 else
 	echo "USING EXISTING BUILDROOT CONFIG"
 	echo "To force update, delete .config or make changes using make menuconfig and build again."
-	make -C buildroot BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT}
+	make -C buildroot BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} FORCE_UNSAFE_CONFIGURE=1
 
 fi

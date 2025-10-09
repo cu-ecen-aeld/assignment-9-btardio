@@ -4,7 +4,21 @@
 #
 ##############################################################
 
-AESD_ASSIGNMENTS_DEVICES_VERSION = 'bd85014441781e394a82e054e510c6dadacde0d4'
+AESD_ASSIGNMENTS_DEVICES_VERSION = '6e08145e87adfdc48b5ac2b8111432382d1981fe'
+#'9f805baea429c2f260c3dc626467bd4c4430a282'
+#'0835f221b8a9c112a52ffac2077cfa3ec6d2d1ea'
+#'32678df311eb5835670467391716c32943baa6b8'
+#'fcecc1d97b09b8b21039ef0addf4e1079ad02856'
+#'29546bd4967892073efdc010ddc8788f1d4febdd'
+#'af79ee9ca521a0a7e70d6f5c73e77484444e3a5a'
+#'297a55e80c321f467891ff0acdaf3f56dfa2a86f'
+#'7e74431b9607626f77de2ead91206f2af1c86480'
+#'0bd5d5a348da0ed4862e528f76868aaeb483f845'
+#'22c91afa9d640708431551f1e0adcb2e57ed4ca1'
+#'57b8d5c50d65934dcc4c91ea5b6735cddfd51827'
+#'85dcb69829cf1528ec60d42cc25001853b410e08'
+#'3b5f9a634ae7bde424217f8e8c50e91b94439e47'
+#'690ffc5a5a7937437e26c41ad9d1308d3423d1c8'
 
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
