@@ -6,7 +6,8 @@
 
 #TODO: Fill up the contents below in order to reference your assignment 3 git contents
 
-AESD_ASSIGNMENTS_SOCKET_VERSION = '630fe8049328bb59d67f88a94281fb6e8b25df2b'
+AESD_ASSIGNMENTS_SOCKET_VERSION = '1f9497ae50ac096c90eb72fe600d7df59fc3431b'
+# '630fe8049328bb59d67f88a94281fb6e8b25df2b'
 # 'e8d4e0ad00780b83f9a99bf944c6333fb9e3b74d'
 # '31b5e5c88525552126783737ed8db6493fc4185b'
 # 'f7e8edf3b8145f436f95fa66533465df8d01e627'
@@ -20,7 +21,7 @@ AESD_ASSIGNMENTS_SOCKET_VERSION = '630fe8049328bb59d67f88a94281fb6e8b25df2b'
 
 # Note: Unable to accomplish the git integration.
 
-AESD_ASSIGNMENTS_SOCKET_SITE = 'git@github.com:cu-ecen-aeld/assignments-3-and-later-btardio.git'
+AESD_ASSIGNMENTS_SOCKET_SITE = 'git@github.com:btardio/aesd_socket.git'
 AESD_ASSIGNMENTS_SOCKET_SITE_METHOD = git
 AESD_ASSIGNMENTS_SOCKET_GIT_SUBMODULES = YES
 
