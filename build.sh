@@ -66,10 +66,10 @@ export CROSS_COMPILE
 
 MYDIR=$(pwd)
 
-if [ ! -f ./Image ]; then
-    bash ${MYDIR}/manual-linux.sh > outlogkernel
-    cp /tmp/aeld/linux-stable/arch/${ARCH}/boot/Image ${MYDIR}
-fi
+#if [ ! -f ./Image ]; then
+#    bash ${MYDIR}/manual-linux.sh > outlogkernel
+#    cp /tmp/aeld/linux-stable/arch/${ARCH}/boot/Image ${MYDIR}
+#fi
 
 # rm -r buildroot/package/ncurses/
 

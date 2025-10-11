@@ -25,22 +25,10 @@ export KERNELDIR
 KERNELRELEASE=$(LINUX_VERSION)
 export KERNELRELEASE
 
-# this is complaining about the gcc flags, wrong compiler
-#define AESD_ASSIGNMENTS_MODULES_BUILD_CMDS
-    #$(info $(KERNELRELEASE))
-	#$(info $(KERNELDIR))
-	#$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/misc-modules/ modules
-	#$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(KERNELDIR) M=$(@D)/misc-modules/ modules
-#endef
 
-# this was moved to a overlay fs per instructions in the assignment
-#define AESD_ASSIGNMENTS_MODULES_INSTALL_TARGET_CMDS   
-#	$(INSTALL) -m 0755 $(@D)/scull/scull.init $(TARGET_DIR)/etc/init.d/S98lddmodules
-#endef
+#AESD_ASSIGNMENTS_MODULES_MODULE_SUBDIRS = misc-modules/
+#AESD_ASSIGNMENTS_MODULES_MODULE_SUBDIRS += scull/
 
-AESD_ASSIGNMENTS_MODULES_MODULE_SUBDIRS = misc-modules/
-AESD_ASSIGNMENTS_MODULES_MODULE_SUBDIRS += scull/
-
-$(eval $(kernel-module))
-$(eval $(generic-package))
+#$(eval $(kernel-module))
+#$(eval $(generic-package))
 

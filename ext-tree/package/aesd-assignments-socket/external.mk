@@ -6,7 +6,8 @@
 
 #TODO: Fill up the contents below in order to reference your assignment 3 git contents
 
-AESD_ASSIGNMENTS_SOCKET_VERSION = '1f9497ae50ac096c90eb72fe600d7df59fc3431b'
+AESD_ASSIGNMENTS_SOCKET_VERSION = '153928ff7f7a69c1bda004508a9a55490d39f7bd'
+# '1f9497ae50ac096c90eb72fe600d7df59fc3431b'
 # '630fe8049328bb59d67f88a94281fb6e8b25df2b'
 # 'e8d4e0ad00780b83f9a99bf944c6333fb9e3b74d'
 # '31b5e5c88525552126783737ed8db6493fc4185b'
@@ -29,17 +30,14 @@ CROSS_COMPILE=aarch64-none-linux-gnu-
 export CROSS_COMPILE
 
 define AESD_ASSIGNMENTS_SOCKET_BUILD_CMDS
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all 
-	$(MAKE) CFLAGS="$(TARGET_CFLAGS)" LDFLAGS="$(TARGET_LDFLAGS)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" $(TARGET_CONFIGURE_OPTS) -C $(@D)/server
+	$(MAKE) CFLAGS="$(TARGET_CFLAGS)" LDFLAGS="$(TARGET_LDFLAGS)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" $(TARGET_CONFIGURE_OPTS) -C $(@D)
 endef
 
 define AESD_ASSIGNMENTS_SOCKET_INSTALL_TARGET_CMDS
-	$(INSTALL) -d 0755 $(@D)/conf/ $(TARGET_DIR)/etc/finder-app/conf/
-	$(INSTALL) -m 0755 $(@D)/conf/* $(TARGET_DIR)/etc/finder-app/conf/
-	$(INSTALL) -m 0755 $(@D)/assignment-autotest/test/assignment4/* $(TARGET_DIR)/bin
-	$(INSTALL) -m 0755 $(@D)/assignment-autotest/test/assignment9-buildroot/drivertest.sh $(TARGET_DIR)/
-	$(INSTALL) -m 0755 $(@D)/server/aesdsocket $(TARGET_DIR)/bin
-	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop $(TARGET_DIR)/etc/init.d/S99aesdsocket
+	$(INSTALL) -m 0755 $(@D)/drivertest.sh $(TARGET_DIR)/
+	$(INSTALL) -m 0755 $(@D)/sockettest.sh $(TARGET_DIR)/
+	$(INSTALL) -m 0755 $(@D)/aesdsocket $(TARGET_DIR)/bin
+	$(INSTALL) -m 0755 $(@D)/aesdsocket-start-stop $(TARGET_DIR)/etc/init.d/S99aesdsocket
 endef
 
 $(eval $(generic-package))
