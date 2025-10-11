@@ -10,3 +10,6 @@
 [submodule "aesd_char"]
 	path = aesd_char
 	url = git@github.com:btardio/aesd_char.git
+[submodule "aesd_socket"]
+	path = aesd_socket
+	url = git@github.com:btardio/aesd_socket

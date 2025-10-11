@@ -1,5 +1,0 @@
-Usage:
-
-echo "dlrowolleh" | nc 127.0.0.1 19000 -w 1
-
-
