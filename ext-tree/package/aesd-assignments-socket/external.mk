@@ -36,7 +36,8 @@ endef
 define AESD_ASSIGNMENTS_SOCKET_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/drivertest.sh $(TARGET_DIR)/
 	$(INSTALL) -m 0755 $(@D)/sockettest.sh $(TARGET_DIR)/
-	$(INSTALL) -m 0755 $(@D)/aesdsocket $(TARGET_DIR)/bin
+	$(INSTALL) -m 0755 $(@D)/aesdsocket $(TARGET_DIR)/bin/aesdsocket
+	$(INSTALL) -m 0755 $(@D)/aesdsocket $(TARGET_DIR)/usr/bin/aesdsocket
 	$(INSTALL) -m 0755 $(@D)/aesdsocket-start-stop $(TARGET_DIR)/etc/init.d/S99aesdsocket
 endef
 
